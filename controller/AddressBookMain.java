@@ -17,7 +17,7 @@ public class AddressBookMain {
 			
 			while(true) {
 				
-				System.out.println("Menu \n1 : Add Contact to Address Book\n2 : Exit\nEnter your Choice :");
+				System.out.println("Menu \n1 : Add Contact to Address Book\n2 : Update Existing Contact\n3 : Exit\nEnter your Choice :");
 				int option = sc.nextInt();
 				
 				switch(option) {
@@ -47,7 +47,66 @@ public class AddressBookMain {
 							 addressBook.addContactToAddressBook(contact);
 							 break;
 							 
-					case 2 : System.exit(0);
+					case 2 : // Console input to take First and Last Names to Update Contact
+							 System.out.println("Enter your First Name to Enable Updating your Contact : ");
+							 String firstName = sc.next();
+							 System.out.println("Enter your Second Name to Enable Updating your Contact : ");
+							 String lastName = sc.next();
+							 
+							 // Updating Contact
+							 Contact contactUpdate = addressBook.updateContact(firstName, lastName);
+							 if(contactUpdate == null)
+							 {
+								 System.out.println("Contact Not Available. Please try Again");
+							 }
+							 else {
+							 
+							 System.out.println("Select the Option you want to Update\n1 : First Name\n2 : Last Name\n3 : Address\n"
+							 		+ "4 : City\n5 : State\n6 : Zip\n7 : Phone Number\n8 : Email\nSelect :");
+							 int choice = sc.nextInt();
+							 
+							 switch(choice) {
+							 case 1 : System.out.println("Enter the new First Name to Update : ");
+							 		  String newFirstName = sc.next();
+							 		  contactUpdate.setFirstName(newFirstName);
+							 		  break;
+							 case 2 : System.out.println("Enter the new Last Name to Update : ");
+					 		  		  String newLastName = sc.next();
+					 		  		  contactUpdate.setLastName(newLastName);
+					 		  		  break;
+							 case 3 : System.out.println("Enter the new Address to Update : ");
+					 		  		  sc.nextLine();
+							 		  String newAddress = sc.nextLine();
+					 		  		  contactUpdate.setAddress(newAddress);
+					 		  		  break;
+							 case 4 : System.out.println("Enter the new City to Update : ");
+			 		  		  		  sc.nextLine();
+					 		  		  String newCity = sc.nextLine();
+					 		  		  contactUpdate.setCity(newCity);
+					 		  		  break;
+							 case 5 : System.out.println("Enter the new State to Update : ");
+							 		  sc.nextLine();
+							 		  String newState = sc.nextLine();
+							 		  contactUpdate.setState(newState);
+							 		  break;
+							 case 6 : System.out.println("Enter the new Zip to Update : ");
+					 		  		  Long newZip = sc.nextLong();
+					 		  		  contactUpdate.setZipCode(newZip);
+					 		  		  break;
+							 case 7 : System.out.println("Enter the new Phone Number to Update : ");
+					 		  		  Long newPhoneNo = sc.nextLong();
+					 		  		  contactUpdate.setPhoneNo(newPhoneNo);
+					 		  		  break;
+							 case 8 : System.out.println("Enter the new Email to Update : ");
+					 		  		  String newEmail = sc.next();
+					 		  		  contactUpdate.setEmail(newEmail);
+					 		  		  break;
+					 		 default : System.out.println("Enter Valid Number"); 
+							 }
+							 }
+							 break;
+							 							 
+					case 3 : System.exit(0);
 				}
 			}
 	}

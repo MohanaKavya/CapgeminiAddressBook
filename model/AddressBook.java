@@ -17,5 +17,18 @@ public class AddressBook {
 		public void addContactToAddressBook(Contact contact) {
 			addressBook.add(contact);
 		}
+		
+		public Contact updateContact(String firstName, String lastName) {
+			Contact contactSearch = null;
+			for(Contact contact : addressBook)
+			{
+				if(contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)) {
+					contactSearch = contact;
+					break;
+				}
+			}
+			
+			return contactSearch;			
+		}
 
 }
