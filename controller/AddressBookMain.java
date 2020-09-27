@@ -17,7 +17,7 @@ public class AddressBookMain {
 			
 			while(true) {
 				
-				System.out.println("Menu \n1 : Add Contact to Address Book\n2 : Update Existing Contact\n3 : Exit\nEnter your Choice :");
+				System.out.println("Menu \n1 : Add Contact to Address Book\n2 : Update Existing Contact\n3 : Remove Contact\n4 : Exit\nEnter your Choice :");
 				int option = sc.nextInt();
 				
 				switch(option) {
@@ -105,8 +105,20 @@ public class AddressBookMain {
 							 }
 							 }
 							 break;
-							 							 
-					case 3 : System.exit(0);
+							 
+					case 3 : // Console input to take First and Last Names to Remove Contact
+						 	 System.out.println("Enter your First Name to Enable Removing your Contact : ");
+						 	 String removeFirstName = sc.next();
+						 	 System.out.println("Enter your Second Name to Enable Removing your Contact : ");
+						 	 String removeLastName = sc.next();
+						 	 boolean remove = addressBook.removeContact(removeFirstName, removeLastName);
+						 	 if(remove)
+						 		 System.out.println("Contact Sucessfully Removed");
+						 	 else
+						 		 System.out.println("Contant not Available. Please Try Again");
+						 	 break;
+						 	 							 							 
+					case 4 : System.exit(0);
 				}
 			}
 	}

@@ -30,5 +30,18 @@ public class AddressBook {
 			
 			return contactSearch;			
 		}
+		
+		public boolean removeContact(String firstName, String lastName) {
+			boolean remove = false;
+			for(Contact contact : addressBook)
+			{
+				if(contact.getFirstName().equals(firstName) && contact.getLastName().equals(lastName)) {
+					addressBook.remove(contact);
+					remove = true;
+					break;
+				}
+			}
+			return remove;
+		}
 
 }
