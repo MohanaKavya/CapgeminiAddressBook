@@ -1,5 +1,6 @@
 package com.capgemini.assignments.controller;
 
+import java.util.Map;
 import java.util.Scanner;
 import com.capgemini.assignments.model.*;
 
@@ -12,13 +13,29 @@ public class AddressBookMain {
 			
 			Scanner sc = new Scanner(System.in);
 			
+			// Instantiation of AddressBookDictionary Class
+			AddressBookDictionary addressBookDictionary = new AddressBookDictionary();
+			
+			while(true) {
+			System.out.println("1. Add New Address Book\n2.Exit\nEnter your Choice :");
+			int select = sc.nextInt();
+			
+			if(select == 1) {
+				System.out.println("Enter the Address Book Name : ");
+				sc.nextLine();
+				String addressBookName = sc.nextLine();
+			
 			// Instantiation of AddressBook Class
 			AddressBook addressBook = new AddressBook();
 			
-			while(true) {
+			addressBookDictionary.addAddressBook(addressBookName, addressBook);
+			
+			int option = 0;
+			
+			while(option != 4) {
 				
 				System.out.println("Menu \n1 : Add Contact to Address Book\n2 : Update Existing Contact\n3 : Remove Contact\n4 : Exit\nEnter your Choice :");
-				int option = sc.nextInt();
+				option = sc.nextInt();
 				
 				switch(option) {
 					// To Take Console Input for Contact Details
@@ -118,9 +135,14 @@ public class AddressBookMain {
 						 		 System.out.println("Contant not Available. Please Try Again");
 						 	 break;
 						 	 							 							 
-					case 4 : System.exit(0);
+					case 4 : break;
 				}
 			}
+			}
+			else
+				System.exit(0);
 	}
+	
+	}		
 
 }
