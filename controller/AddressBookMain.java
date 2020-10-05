@@ -1,5 +1,6 @@
 package com.capgemini.assignments.controller;
 
+import java.util.*;
 import java.util.Map;
 import java.util.Scanner;
 import com.capgemini.assignments.model.*;
@@ -56,12 +57,24 @@ public class AddressBookMain {
 							 Long phone_no = sc.nextLong();
 							 System.out.println("Enter Email ID : ");
 							 String email = sc.next();
-			
+							 boolean duplicate = false;
+							 for(Contact c : addressBook.getAddressBook())
+							 {
+								 if((c.getFirstName()).equals(first_name)) {
+									 if((c.getLastName()).equals(last_name)) {
+										 duplicate = true;
+										 System.out.println("Duplicate Entry. Try Again");
+										 break;
+									 }
+								 }
+							 }
+							 if(duplicate==false) {
 							 // Instantiation of Contact Class
 							 Contact contact = new Contact(first_name, last_name, address, city, state, zip_code, phone_no, email);
 							
 							 // Add New Contact into Address Book
 							 addressBook.addContactToAddressBook(contact);
+							 }
 							 break;
 							 
 					case 2 : // Console input to take First and Last Names to Update Contact
