@@ -3,6 +3,8 @@ package com.capgemini.assignments.controller;
 import java.util.*;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Predicate;
+
 import com.capgemini.assignments.model.*;
 
 public class AddressBookMain {
@@ -57,23 +59,16 @@ public class AddressBookMain {
 							 Long phone_no = sc.nextLong();
 							 System.out.println("Enter Email ID : ");
 							 String email = sc.next();
-							 boolean duplicate = false;
-							 for(Contact c : addressBook.getAddressBook())
-							 {
-								 if((c.getFirstName()).equals(first_name)) {
-									 if((c.getLastName()).equals(last_name)) {
-										 duplicate = true;
-										 System.out.println("Duplicate Entry. Try Again");
-										 break;
-									 }
-								 }
-							 }
-							 if(duplicate==false) {
+							 
+							boolean duplicateCheck = (addressBook.getAddressBook()).stream().noneMatch(Contact -> Contact.getFirstName().equals(first_name) && Contact.getLastName().equals(last_name));                              
+							 
+							 if(duplicateCheck) {
 							 // Instantiation of Contact Class
 							 Contact contact = new Contact(first_name, last_name, address, city, state, zip_code, phone_no, email);
 							
 							 // Add New Contact into Address Book
 							 addressBook.addContactToAddressBook(contact);
+							 System.out.println("done");
 							 }
 							 break;
 							 
