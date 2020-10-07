@@ -4,6 +4,8 @@ import java.util.*;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.capgemini.assignments.model.*;
 
@@ -20,7 +22,7 @@ public class AddressBookMain {
 			AddressBookDictionary addressBookDictionary = new AddressBookDictionary();
 			
 			while(true) {
-			System.out.println("1. Add New Address Book\n2.Exit\nEnter your Choice :");
+			System.out.println("1. Add New Address Book\n2.Search Persons in a City\n3.Search Persons in a State\n4.Exit\nEnter your Choice :");
 			int select = sc.nextInt();
 			
 			if(select == 1) {
@@ -65,10 +67,9 @@ public class AddressBookMain {
 							 if(duplicateCheck) {
 							 // Instantiation of Contact Class
 							 Contact contact = new Contact(first_name, last_name, address, city, state, zip_code, phone_no, email);
-							
+							System.out.println(contact);
 							 // Add New Contact into Address Book
 							 addressBook.addContactToAddressBook(contact);
-							 System.out.println("done");
 							 }
 							 break;
 							 
@@ -147,10 +148,33 @@ public class AddressBookMain {
 				}
 			}
 			}
+			else if(select==2) {
+				System.out.println("Enter the City Name to Search for Persons :");
+				sc.nextLine();
+				String citySearch = sc.nextLine();
+				List<Contact> contactList = new ArrayList();
+				for(AddressBook book : (addressBookDictionary.getAddressBookDictionary().values())) {
+					contactList.addAll((book.getAddressBook()).stream().filter(Contact -> (Contact.getCity()).equalsIgnoreCase(citySearch)).collect(Collectors.toList()));					
+				}
+				for(Contact c : contactList)
+					System.out.println(c);
+			}
+			else if(select==3) {
+				System.out.println("Enter the State Name to Search for Persons :");
+				sc.nextLine();
+				String stateSearch = sc.nextLine();
+				List<Contact> contactList = new ArrayList();
+				for(AddressBook book : (addressBookDictionary.getAddressBookDictionary().values())) {
+					contactList.addAll((book.getAddressBook()).stream().filter(Contact -> (Contact.getState()).equalsIgnoreCase(stateSearch)).collect(Collectors.toList()));		
+					
+				}
+				for(Contact c : contactList) {
+					System.out.println(c);
+				}
+				
+			}
 			else
 				System.exit(0);
 	}
-	
 	}		
-
 }

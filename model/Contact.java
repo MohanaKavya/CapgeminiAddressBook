@@ -81,5 +81,8 @@ public class Contact {
 	{
 		this.phoneNo = phoneNo;
 	}
+	public String toString() {
+		return firstName+" "+lastName+" "+address+" "+city+" "+state+" "+zipCode+" "+phoneNo+" "+email;
+	}
 
 }
