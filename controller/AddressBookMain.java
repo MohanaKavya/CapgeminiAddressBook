@@ -41,7 +41,7 @@ public class AddressBookMain {
 			
 			while(option != 4) {
 				
-				System.out.println("Menu \n1 : Add Contact to Address Book\n2 : Update Existing Contact\n3 : Remove Contact\n4 : Exit\nEnter your Choice :");
+				System.out.println("Menu \n1 : Add Contact to Address Book\n2 : Update Existing Contact\n3 : Remove Contact\n4 : Sort by Person's Name\n5 : Exit\nEnter your Choice :");
 				option = sc.nextInt();
 				
 				switch(option) {
@@ -156,7 +156,11 @@ public class AddressBookMain {
 						 		 System.out.println("Contant not Available. Please Try Again");
 						 	 break;
 						 	 							 							 
-					case 4 : break;
+					case 4 : List<String> sortedByName = new ArrayList<String>();
+					sortedByName = (addressBook.getAddressBook()).stream().map(Contact -> Contact.toString()).sorted().collect(Collectors.toList());
+					for (String name : sortedByName)
+						System.out.println(name);
+						break;
 				}
 			}
 			}
