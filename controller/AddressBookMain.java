@@ -18,7 +18,7 @@ public class AddressBookMain {
 			
 			Scanner sc = new Scanner(System.in);
 			
-			// Instantiation of AddressBookDictionary Class
+			// Instantiation of Classes
 			AddressBookDictionary addressBookDictionary = new AddressBookDictionary();
 			CityPersonDictionary cityPersonDictionary = new CityPersonDictionary();
 			StatePersonDictionary statePersonDictionary = new StatePersonDictionary();
@@ -32,16 +32,15 @@ public class AddressBookMain {
 				sc.nextLine();
 				String addressBookName = sc.nextLine();
 			
-			// Instantiation of AddressBook Class
 			AddressBook addressBook = new AddressBook();
 			
 			addressBookDictionary.addAddressBook(addressBookName, addressBook);
 			
 			int option = 0;
 			
-			while(option != 4) {
+			while(option != 8) {
 				
-				System.out.println("Menu \n1 : Add Contact to Address Book\n2 : Update Existing Contact\n3 : Remove Contact\n4 : Sort by Person's Name\n5 : Exit\nEnter your Choice :");
+				System.out.println("Menu \n1 : Add Contact to Address Book\n2 : Update Existing Contact\n3 : Remove Contact\n4 : Sort by Person's Name\n5 : Sort by City\n6 : Sort by State\n7 : Sort by Zip\n8 : Exit\nEnter your Choice :");
 				option = sc.nextInt();
 				
 				switch(option) {
@@ -157,10 +156,26 @@ public class AddressBookMain {
 						 	 break;
 						 	 							 							 
 					case 4 : List<String> sortedByName = new ArrayList<String>();
-					sortedByName = (addressBook.getAddressBook()).stream().map(Contact -> Contact.toString()).sorted().collect(Collectors.toList());
-					for (String name : sortedByName)
-						System.out.println(name);
-						break;
+							 sortedByName = (addressBook.getAddressBook()).stream().map(Contact -> Contact.toString()).sorted().collect(Collectors.toList());
+							 for (String name : sortedByName)
+							 System.out.println(name);
+							 break;
+						
+					case 5 : (addressBook.getAddressBook()).sort(new CityComparator());  
+							 for (Contact c : addressBook.getAddressBook())
+							 System.out.println(c);
+							 break;
+						
+					case 6 : (addressBook.getAddressBook()).sort(new StateComparator());
+							 for (Contact c : addressBook.getAddressBook())
+							 System.out.println(c);
+							 break;
+						
+					case 7 : (addressBook.getAddressBook()).sort(new ZipComparator());
+							 for (Contact c : addressBook.getAddressBook())
+							 System.out.println(c);
+							 break;
+					case 8 : break;
 				}
 			}
 			}
