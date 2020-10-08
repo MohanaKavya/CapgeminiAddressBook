@@ -20,6 +20,8 @@ public class AddressBookMain {
 			
 			// Instantiation of AddressBookDictionary Class
 			AddressBookDictionary addressBookDictionary = new AddressBookDictionary();
+			CityPersonDictionary cityPersonDictionary = new CityPersonDictionary();
+			StatePersonDictionary statePersonDictionary = new StatePersonDictionary();
 			
 			while(true) {
 			System.out.println("1. Add New Address Book\n2.Search Persons in a City\n3.Search Persons in a State\n4.Exit\nEnter your Choice :");
@@ -70,6 +72,8 @@ public class AddressBookMain {
 							System.out.println(contact);
 							 // Add New Contact into Address Book
 							 addressBook.addContactToAddressBook(contact);
+							 cityPersonDictionary.addPerson(city, contact);
+							 statePersonDictionary.addPerson(state, contact);
 							 }
 							 break;
 							 
@@ -86,6 +90,8 @@ public class AddressBookMain {
 								 System.out.println("Contact Not Available. Please try Again");
 							 }
 							 else {
+								 cityPersonDictionary.removePerson(contactUpdate.getCity(), contactUpdate);
+								 statePersonDictionary.removePerson(contactUpdate.getState(), contactUpdate);
 							 
 							 System.out.println("Select the Option you want to Update\n1 : First Name\n2 : Last Name\n3 : Address\n"
 							 		+ "4 : City\n5 : State\n6 : Zip\n7 : Phone Number\n8 : Email\nSelect :");
@@ -129,6 +135,8 @@ public class AddressBookMain {
 					 		  		  break;
 					 		 default : System.out.println("Enter Valid Number"); 
 							 }
+							 cityPersonDictionary.addPerson(contactUpdate.getCity(), contactUpdate);
+							 statePersonDictionary.addPerson(contactUpdate.getState(), contactUpdate);
 							 }
 							 break;
 							 
@@ -137,9 +145,13 @@ public class AddressBookMain {
 						 	 String removeFirstName = sc.next();
 						 	 System.out.println("Enter your Second Name to Enable Removing your Contact : ");
 						 	 String removeLastName = sc.next();
+						 	 Contact contactRemove = addressBook.updateContact(removeFirstName, removeLastName);
 						 	 boolean remove = addressBook.removeContact(removeFirstName, removeLastName);
-						 	 if(remove)
+						 	 if(remove) {
 						 		 System.out.println("Contact Sucessfully Removed");
+						 		 cityPersonDictionary.removePerson(contactRemove.getCity(), contactRemove);
+								 statePersonDictionary.removePerson(contactRemove.getState(), contactRemove);
+						 	 }
 						 	 else
 						 		 System.out.println("Contant not Available. Please Try Again");
 						 	 break;
