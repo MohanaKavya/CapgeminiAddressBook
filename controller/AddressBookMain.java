@@ -24,7 +24,7 @@ public class AddressBookMain {
 			StatePersonDictionary statePersonDictionary = new StatePersonDictionary();
 			
 			while(true) {
-			System.out.println("1. Add New Address Book\n2.Search Persons in a City\n3.Search Persons in a State\n4.Exit\nEnter your Choice :");
+			System.out.println("1. Add New Address Book\n2. Search Persons in a City\n3. Search Persons in a State\n4. Count by City\n5. Count by State\n6. Exit\nEnter your Choice :");
 			int select = sc.nextInt();
 			
 			if(select == 1) {
@@ -184,6 +184,30 @@ public class AddressBookMain {
 					System.out.println(c);
 				}
 				
+			}
+			else if(select==4) {
+				System.out.println("Enter the City Name to get Count of Persons :");
+				sc.nextLine();
+				String cityCount = sc.nextLine();
+				long count = 0;
+				for(Map.Entry<String, AddressBook> entry : cityPersonDictionary.getCityPersonDictionary().entrySet()) {
+					if(entry.getKey().equalsIgnoreCase(cityCount)) {
+					count =	entry.getValue().getAddressBook().stream().count();
+					}
+				}
+				System.out.println("Count of Persons in "+cityCount+" is "+count);
+			}
+			else if(select==5) {
+				System.out.println("Enter the State Name to get Count of Persons :");
+				sc.nextLine();
+				String stateCount = sc.nextLine();
+				long count = 0;
+				for(Map.Entry<String, AddressBook> entry : statePersonDictionary.getStatePersonDictionary().entrySet()) {
+					if(entry.getKey().equalsIgnoreCase(stateCount)) {
+					count =	entry.getValue().getAddressBook().stream().count();
+					}
+				}
+				System.out.println("Count of Persons in "+stateCount+" is "+count);		
 			}
 			else
 				System.exit(0);
